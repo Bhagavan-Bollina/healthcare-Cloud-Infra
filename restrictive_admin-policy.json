@@ -1,0 +1,93 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreateUser",
+                "iam:DeleteUser",
+                "iam:ListUsers",
+                "iam:CreateAccessKey",
+                "iam:DeleteAccessKey",
+                "iam:ListAccessKeys",
+                "iam:PutUserPolicy",
+                "iam:DeleteUserPolicy",
+                "iam:ListUserPolicies",
+                "iam:ListGroupsForUser",
+                "iam:AddUserToGroup",
+                "iam:RemoveUserFromGroup"
+            ],
+            "Resource": "arn:aws:iam::*:user/*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "kms:CreateKey",
+                "kms:DescribeKey",
+                "kms:ScheduleKeyDeletion",
+                "kms:ListKeys",
+                "kms:ListKeyPolicies",
+                "kms:PutKeyPolicy"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:Describe*",
+                "ec2:StartInstances",
+                "ec2:StopInstances",
+                "ec2:RebootInstances",
+                "ec2:TerminateInstances"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "cloudtrail:LookupEvents",
+                "cloudtrail:CreateTrail",
+                "cloudtrail:UpdateTrail",
+                "cloudtrail:DeleteTrail",
+                "cloudtrail:StartLogging",
+                "cloudtrail:StopLogging"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:ListBucket",
+                "s3:PutObject",
+                "s3:PutObjectAcl",
+                "s3:GetObjectVersion"
+            ],
+            "Resource": [
+                "arn:aws:s3:::your-secure-bucket",
+                "arn:aws:s3:::your-secure-bucket/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": "cloudwatch:*",
+            "Resource": "*"
+        },
+        {
+            "Effect": "Deny",
+            "Action": "iam:*",
+            "NotResource": "arn:aws:iam::*:user/${aws:username}"
+        },
+        {
+            "Effect": "Deny",
+            "Action": [
+                "s3:DeleteBucket",
+                "s3:DeleteObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::your-secure-bucket",
+                "arn:aws:s3:::your-secure-bucket/*"
+            ]
+        }
+    ]
+}
